@@ -16,9 +16,9 @@ def index(request):
 
         courses = courses.filter(
             Q(semester__iexact=semester) &
-            Q(level__iexact=level) &
-            Q(department_name__icontains=department_name)
+            Q(level__iexact=level) 
         )
+        courses = courses.filter(Q(department_name__iexact=department_name) |Q(department_name__icontains=department_name))
 
         if courses.exists():
             for course in courses:
